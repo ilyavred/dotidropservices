@@ -1,20 +1,17 @@
-var PORT = process.env.PORT || 5000;
-var express = require('express');
-var app = express();
+const express = require('express')
+const serveStatic = require('serve-static')
+const path = require('path')
 
-var http = require('http');
-var server = http.Server(app);
+const app = express()
 
-app.use(express.static('client'));
+//here we are configuring dist to serve app files
+app.use('/', serveStatic(path.join(__dirname, '/dist')))
 
-server.listen(PORT, function() {
-  console.log('Chat server running');
-});
+// this * route is to serve project on different page routes except root `/`
+app.get(/.*/, function (req, res) {
+    res.sendFile(path.join(__dirname, '/dist/index.html'))
+})
 
-var io = require('socket.io')(server);
-
-io.on('connection', function(socket) {
-  socket.on('message', function(msg) {
-    io.emit('message', msg);
-  });
-});
+const port = process.env.PORT || 8080
+app.listen(port)
+console.log(`app is listening on port: ${port}`)
