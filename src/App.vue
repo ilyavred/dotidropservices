@@ -30,11 +30,12 @@
 </template>
 
 <style lang="sass">
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap')
 #app
   font-family: Montserrat
   font-style: normal
   font-weight: 500
-  font-size: 14px
+  font-size: 16px
   line-height: 145.4%
   color: #4F4F4F
 
